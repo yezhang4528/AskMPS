@@ -40,8 +40,13 @@ class MPSWeb:
     def getAllNews(self):
         #Soup already cooked in self._soup :)
         ret = []
+        newsSoup = self._soup.select('#index_news article')
+        for news in newsSoup:
+            newsTitle = news['aria-label']
+            newsContent = news.select('.item-text')[0].text.strip()
+            ret.append(News(newsTitle, newsContent))
         #ret.append(News("Hire Bus Drivers", "Apply Today!"))
-        print("Not implemented yet!")
+        #print("Not implemented yet!")
         return ret
 
      # Return a list of events found on MPS home page.
@@ -49,8 +54,18 @@ class MPSWeb:
     def getAllEvents(self):
         #Soup already cooked in self._soup :)
         ret = []
+        eventSoup = self._soup.select('#index_events article')
+        for event in eventSoup:
+            eventTitle = event.select('.item-name')[0].text.strip()
+            eventMonth = event.select('.event-month')[0].text.strip()
+            eventDay = event.select('.event-day')[0].text.strip()
+            selectTime = event.select('.event-time')
+            eventTime = ''
+            if selectTime:
+                eventTime = selectTime[0].text.strip()
+            ret.append(Event(eventTitle, eventMonth, eventDay, eventTime))
         #ret.append(Event("One session day", "June", "8"))
-        print("Not implemented yet!")
+        #print("Not implemented yet!")
         return ret
 
 

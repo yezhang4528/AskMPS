@@ -1,7 +1,8 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-with urlopen("https://www.mtps.org/") as req:
+#with urlopen("https://www.mtps.org/") as req:
+with urlopen('file:///C:/Sarah/avinci_club/AskMPS/sandbox/simplempsweb/simplemps.html') as req:
     soup = BeautifulSoup(req, 'html.parser')
 
     newsSoup = soup.select('#index_news article')
